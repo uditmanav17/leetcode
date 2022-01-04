@@ -6,32 +6,28 @@
 #         self.right = right
 
 class Solution:
-    def __init__(self):
-        self.ans = []
-        
-    def pathSum(self, 
-                root: Optional[TreeNode], 
-                targetSum: int, 
-                curr_ans=None) -> List[List[int]]:
-        
-        if curr_ans is None:
-            curr_ans = []
-            
-        if root is None:
-            return
-            
-        if root.left is None and root.right is None:
-            temp_ans = curr_ans + [root.val]
-            if sum(temp_ans) == targetSum:
-                self.ans.append(temp_ans[:])
-            return self.ans
-        
-        curr_ans.append(root.val)
-        self.pathSum(root.left, targetSum, curr_ans)
-        self.pathSum(root.right, targetSum, curr_ans)
-        curr_ans.pop()
-        
-        return self.ans
-        
-        
+    def pathSum(self, root: TreeNode, total: int) -> List[List[int]]:
+        if not root:
+            return []
+        res = [root]
+        answer = []
+        self.pathSumHelper(root, total, res, answer)
+        return answer
+
+    def pathSumHelper(self, node, total, res, answer):
+        if node.left is None and node.right is None and self.checkSum(res) == total:
+            answer.append([node.val for node in res])
+
+        if node.left:
+            res.append(node.left)
+            self.pathSumHelper(node.left, total, res, answer)
+            res.pop()
+
+        if node.right:
+            res.append(node.right)
+            self.pathSumHelper(node.right, total, res, answer)
+            res.pop()
+
+    def checkSum(self, li):
+        return sum(node.val for node in li)
         
