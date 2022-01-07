@@ -13,5 +13,8 @@ class Solution:
                 if next_node not in visited:
                     q.append(next_node)
                     
+                if len(rooms) == len(visited):
+                    return True
+                    
         return len(rooms) == len(visited)
         
