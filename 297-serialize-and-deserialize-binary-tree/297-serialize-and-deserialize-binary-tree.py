@@ -19,19 +19,25 @@ class Codec:
             return "#"
         return f"{root.val} {self.serialize(root.left)} {self.serialize(root.right)}"
 
-    def deserialize(self, data, bracket_mappings=None):
+    def deserialize(self, data):
         """Decodes your encoded data to tree.
         
         :type data: str
         :rtype: TreeNode
         """
         # print(data)
-        self.data = data
-        if self.data[0] == '#': return None
-        node = TreeNode(self.data[:self.data.find(' ')]) 
-        node.left = self.deserialize(self.data[self.data.find(' ')+1:])
-        node.right = self.deserialize(self.data[self.data.find(' ')+1:])
-        return node
+        def decode(q):
+            if q[0] == '#':
+                q.popleft()
+                return None
+            node = TreeNode(int(q.popleft()))
+            # print(node.val, q)
+            # deque - q is mutable, so q for left and right will be different
+            node.left = decode(q)
+            node.right = decode(q)
+            return node
+        
+        return decode(collections.deque(data.split(' ')))
         
 
 # Your Codec object will be instantiated and called as such:
