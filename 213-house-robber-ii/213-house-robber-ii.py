@@ -18,7 +18,9 @@ class Solution:
             
         
     def rob(self, nums: List[int]) -> int:
-        # take first, start from 2nd, skip last
-        return max(nums[0] + self.rob_linear(nums[2:-1]), 
-                   self.rob_linear(nums[1:])) # start from first
+        if len(nums) == 1:
+            return nums[0]
+        
+        return max(self.rob_linear(nums[:-1]), 
+                   self.rob_linear(nums[1:]))
         
