@@ -1,19 +1,8 @@
-# string formatting
-# https://colab.research.google.com/github/uditmanav17/CoreySchafer/blob/master/String%20Formatting/String%20Formatting.ipynb
+# https://leetcode.com/problems/find-unique-binary-string/discuss/1418687/Detailed-Explanation-O(N)-short-concise-code-Cantor's-Diagonalization-Java-Python-C%2B%2B
 
 class Solution:
     def findDifferentBinaryString(self, nums: List[str]) -> str:
-        # check constraints
-        n = len(nums)
-        nums = set(nums)
-        
-        max_num = int('1' * n, 2)
-        
-        while max_num >= 0:
-            num = bin(max_num)[2:]
-            num = "0" * (n - len(num)) + num
-            if num not in nums:
-                return num
-            max_num -= 1
-                
-        
+        res = []
+        for i in range(len(nums)):
+            res.append(str(1 - int(nums[i][i])))
+        return "".join(res)
