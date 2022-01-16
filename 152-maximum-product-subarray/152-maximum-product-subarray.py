@@ -1,23 +1,16 @@
+
 class Solution:
-    def maxProduct(self, nums: List[int]) -> int:
-        pre_prod, suff_prod = [], []
-        
+    def maxProduct(self, nums: "list[int]") -> int:
+        prefix, suffix, max_so_far = 0, 0, nums[0]
         n = len(nums)
-        left_prod = right_prod = 1
-        for idx in range(n):
-            left_prod = left_prod or 1
-            left_prod = (left_prod * nums[idx])
-            pre_prod.append(left_prod)
-            
-            right_prod = right_prod or 1
-            right_prod = (right_prod * nums[n - 1 - idx])
-            suff_prod.append(right_prod)
-            
-        suff_prod = suff_prod[::-1]
+        for i in range(n):
+            prefix = (prefix or 1) * nums[i]
+            suffix = (suffix or 1) * nums[n - i - 1]
+            max_so_far = max(max_so_far, prefix, suffix)
+
+            # print(f"{i=}\t{~i=}\t{nums[~i]=}")
+            # print(prefix, suffix, max_so_far)
+
+        return max_so_far
         
-        # print(pre_prod, suff_prod)
-        ans = [max(i, j) for i, j in zip(pre_prod, suff_prod)]
-        # print(ans)
-        
-        return max(ans)
         
