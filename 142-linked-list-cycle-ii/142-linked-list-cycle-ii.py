@@ -5,29 +5,25 @@
 #         self.next = None
 
 class Solution:
-    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head:
-            return 
-        
+    def detectCycle(self, head: ListNode) -> ListNode:
+        if not head: return head
         slow = head
         fast = head.next
         
-        while fast and fast.next:
+        while fast and fast.next and fast != slow:
             slow = slow.next
             fast = fast.next.next
             
-            if slow == fast:
-                break
-                
-        if not fast or not fast.next:
-            return 
+        if fast != slow:
+            return None
         
-        slow = slow.next
         fast = head
-        
-        while slow != fast:
-            slow = slow.next
+        slow = slow.next
+        while fast != slow:
             fast = fast.next
+            slow = slow.next
+        return fast
             
-        return slow
+        
+        
         
