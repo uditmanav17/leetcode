@@ -17,6 +17,4 @@ class Solution:
             total_curr_gas += (curr_gas - curr_cost)
                 
         return start_idx
-            
-            
-            
+
