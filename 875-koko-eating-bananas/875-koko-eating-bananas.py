@@ -1,19 +1,22 @@
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        if h == len(piles):
-            return max(piles)
+        beg, end = 1, max(piles)
         
-        beg, end = 0, max(piles)
-        
-        while beg + 1 < end:
-            
+        while beg < end:
+            # Get the middle index between left and right boundary indexes.
+            # hour_spent stands for the total hour Koko spends.
             mid = beg + (end - beg) // 2
             
-            bites = sum(ceil(i/mid) for i in piles)
+            # Iterate over the piles and calculate hour_spent.
+            # We increase the hour_spent by ceil(pile / middle)
+            bites = sum(ceil(pile/mid) for pile in piles)
+            
+            # Check if middle is a workable speed, and cut the search space by half.
             if bites > h:
-                beg = mid
+                beg = mid + 1
             else:
                 end = mid
-                
-        return end
         
+        # Once the left and right boundaries coincide, we find the target value,
+        # that is, the minimum workable eating speed.       
+        return end
