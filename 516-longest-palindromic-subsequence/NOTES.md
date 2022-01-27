@@ -1,0 +1,8 @@
+From Brute force to DP - https://leetcode.com/problems/longest-palindromic-subsequence/discuss/99111/Evolve-from-brute-force-to-dp
+​
+LCS Approach - https://leetcode.com/problems/longest-palindromic-subsequence/discuss/99151/Super-simple-solution-using-reversed-string
+​
+Here is a reasoning for why LCS works -
+* A palindrome string and it's reverse are equal. But why does it work with LCS ? Focus on the two properties of a palindrome. First, the character `i` and `n-i-1` are always equal. Second, for any character` j > i`, the match `n-j-1` is always less than `n-i-1`. That is every pair is contained inside another pair or is a single character(the center of odd length palindrome)
+* Imagine you are doing bottom up DP, with the original string representing the columns and the reversed string representing the rows. Now suppose we have a match at index `i,j`, we fulfill the first property of a palindrome.
+* Now when you look diagonally at `i-1, j-1` for any index `k < i` which had a match with index l < j, we always have the property that index of k in string s is always less than index of l in string s. This is because l is working from 0 on reversed s. Hence, we go are going larger index to smaller ones in s. So s(k) < s(i) and s(j) < s(l) where s() represents index in original string. Therefore for any match you are always ensured that your current pair is contained in the range of the previous pair hence preserving the second property of a palindrome
