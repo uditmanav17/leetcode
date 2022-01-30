@@ -1,19 +1,22 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
-        position = len(nums) - 1
-        steps_taken = 0
+        maxRange = steps = nums[0]
+        jumps = 0
         
-        # till we have not reached first index
-        while position != 0:
-            # iterate over nums arr
-            for idx in range(position):
-                # if we can reach from curr_idx to last position
-                # update position and continue while loop
-                if nums[idx] >= position - idx:
-                    position = idx
-                    steps_taken += 1
-                    break
+        if steps == 0 or len(nums) == 1:
+            return 0
         
-        return steps_taken
-        
-        
+        for idx in range(1, len(nums)-1):
+            num = nums[idx]
+            # check max reachable index
+            maxRange = max(maxRange, num + idx)
+            steps -= 1
+
+            # if we don't have any steps to take, 
+            # we jump
+            if steps == 0:
+                jumps += 1
+                steps = maxRange - idx
+            # print(f"{steps=}")
+
+        return jumps + 1
