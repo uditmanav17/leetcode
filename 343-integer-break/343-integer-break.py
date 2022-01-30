@@ -1,29 +1,15 @@
-from functools import lru_cache
-from typing import List
-from pprint import pprint as pp
-
 
 class Solution:
     def integerBreak(self, n: int) -> int:
-        
-        @lru_cache(None)
-        def break_int(n):
-            if n <= 1:
-                return 1
 
-            ans = float("-inf")
+        d = {1: 1}
 
-            for n1 in range(1, n):
-                n2 = n - n1
-                # print(n, n1, n2)
-                a1 = n1 * n2
-                a2 = break_int(n1) * break_int(n2)
-                a3 = n1 * break_int(n2)
-                a4 = break_int(n1) * n2
-                ans = max(a1, a2, a3, a4, ans)
-
-            return ans
-
-        return break_int(n)
-
-    
+        for num in range(2, n + 1):
+            d[num] = 0 if num == n else num
+            
+            for j in range(1, num):
+                val = d[j] * d[num - j]
+                d[num] = max(d[num], val)
+                
+        # print(d)
+        return d[n]
