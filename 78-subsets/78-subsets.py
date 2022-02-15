@@ -40,9 +40,9 @@ class Solution:
         
     
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        # return self.subset_iterative(nums)
+        return self.subset_iterative(nums)
         # return self.subset_bitManipulation(nums)
-        return self.subset_recursive(nums)
+        # return self.subset_recursive(nums)
         
     
         
