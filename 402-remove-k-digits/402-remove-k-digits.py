@@ -20,10 +20,9 @@ class Solution:
     def approach2(self, num: str, k: int) -> str:
         # Time - O(n)
         # Space - O(n)
+        stack = []
         
-        stack = deque([])
-        
-        for digit in num:
+        for digit in num + "0":
             # directly comparing strings based on ASCII
             # as long as topmost digit of stack is greater than curr digit
             # and we have k > 0, remove topmost digits
@@ -34,13 +33,13 @@ class Solution:
             
         # print(stack)
         # remove leading 0s
-        ans = "".join(stack).lstrip("0")
+        ans = "".join(stack[:-1]).lstrip("0")
         return ans if ans != "" else "0"
 
         
     def removeKdigits(self, num: str, k: int) -> str:
-        return self.approach1(num, k)
-        # return self.approach2(num, k)
+        # return self.approach1(num, k)
+        return self.approach2(num, k)
         
         
         
