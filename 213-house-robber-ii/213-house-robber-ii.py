@@ -1,26 +1,27 @@
-
 class Solution:
-    def rob_linear(self, nums: List[int]) -> int:
+    def houseRob1(self, nums):
         if not nums:
             return 0
         
-        if len(nums) == 1:
+        n = len(nums)
+        if n < 2:
             return nums[0]
         
-        ans = [0] * len(nums)
-        ans[0] = nums[0]
-        ans[1] = max(nums[:2])
+        costs = [0] * n
+        costs[0] = nums[0]
+        costs[1] = max(nums[0], nums[1])
         
-        for idx in range(2, len(nums)):
-            ans[idx] = max(ans[idx - 1], nums[idx] + ans[idx - 2])
+        for idx in range(2, n):
+            costs[idx] = max(costs[idx - 1], costs[idx - 2] + nums[idx])
             
-        return ans[-1]
-            
+        return costs[-1]
+        
         
     def rob(self, nums: List[int]) -> int:
         if len(nums) == 1:
             return nums[0]
         
-        return max(self.rob_linear(nums[:-1]), 
-                   self.rob_linear(nums[1:]))
+        a1, a2 = self.houseRob1(nums[1:]), self.houseRob1(nums[:-1])
+        # print(a1, a2)
+        return max(a1, a2)
         
