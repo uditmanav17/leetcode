@@ -1,52 +1,20 @@
-
 class Solution:
-    def minDistance(self, word1: str, word2: str) -> int:
-        # return self.dp_sol(word1, word2)
-        memo = {}
-        return self.memo_sol(word1, word2, 0, 0, memo)
-    
-    def dp_sol(self, word1: str, word2: str) -> int:
-        l1, l2 = len(word1), len(word2)
-        dist = [[0] * (l1 + 1) for _ in range(l2 + 1)]
-
-        for r, c in product(range(l2 + 1), range(l1 + 1)):
-            if r == 0 or c == 0:
-                dist[r][c] = r or c
+    def minDistance(self, w1: str, w2: str) -> int:
+        l1, l2 = len(w1) + 1, len(w2) + 1
+        
+        dp = [[0] * l1 for _ in range(l2)]
+        
+        for i, j in product(range(l2), range(l1)):
+            if i == 0 or j == 0:
+                dp[i][j] = i or j
                 continue
-
-            char1 = word2[r - 1]
-            char2 = word1[c - 1]
-
-            if char1 == char2:
-                dist[r][c] = dist[r - 1][c - 1]
+                
+            ch1, ch2 = w1[j - 1], w2[i - 1]
+            
+            if ch1 == ch2:
+                dp[i][j] = dp[i-1][j-1]
             else:
-                dist[r][c] = 1 + min(dist[r - 1][c], 
-                                     dist[r][c - 1], 
-                                     dist[r - 1][c - 1])
-
-        # pprint(dist)
-        return dist[-1][-1]
-
-    
-    def memo_sol(self, word1, word2, i, j, memo):
-        """Memoized solution"""
-        if i == len(word1) and j == len(word2):
-            return 0
+                dp[i][j] = min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]) + 1
+                
+        return dp[-1][-1]
         
-        if i == len(word1):
-            return len(word2) - j
-        
-        if j == len(word2):
-            return len(word1) - i
-
-        if (i, j) not in memo:
-            if word1[i] == word2[j]:
-                ans = self.memo_sol(word1, word2, i + 1, j + 1, memo)
-            else: 
-                insert = 1 + self.memo_sol(word1, word2, i, j + 1, memo)
-                delete = 1 + self.memo_sol(word1, word2, i + 1, j, memo)
-                replace = 1 + self.memo_sol(word1, word2, i + 1, j + 1, memo)
-                ans = min(insert, delete, replace)
-            memo[(i, j)] = ans
-        return memo[(i, j)]
-    
