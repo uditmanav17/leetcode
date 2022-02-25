@@ -1,15 +1,19 @@
 
 class Solution:
     def integerBreak(self, n: int) -> int:
-
-        d = {1: 1}
-
-        for num in range(2, n + 1):
-            d[num] = 0 if num == n else num
-            
-            for j in range(1, num):
-                val = d[j] * d[num - j]
-                d[num] = max(d[num], val)
-                
-        # print(d)
-        return d[n]
+        # this should not happen acc to constraint
+        if n <= 1:
+            return 1
+        
+        # base cases
+        if n <= 3:
+            return n - 1
+        
+        q, r = divmod(n, 3)
+        
+        # check notes for explanation
+        if r == 0:
+            return pow(3, q)
+        elif r == 1:
+            return pow(3, q - 1) * 4
+        return pow(3, q) * 2
