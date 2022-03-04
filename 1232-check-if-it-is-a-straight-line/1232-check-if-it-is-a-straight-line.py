@@ -1,28 +1,15 @@
 
 class Solution:
     def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
-        if len(coordinates) == 2:
-            return True
         
-        slopes = set()
+        x1, y1 = coordinates.pop()
+        x2, y2 = coordinates.pop()
         
-        x0, y0 = coordinates[0]
-        for idx in range(1, len(coordinates)):
-            x1, y1 = coordinates[idx]
-            
-            numerator = y1 - y0
-            deno = x1 - x0
-            
-            if deno == 0:
-                slopes.add(float("inf"))
-                continue 
-            
-            slope = numerator / deno
-            slopes.add(slope)
-            
-        if len(slopes) > 1:
-            return False
+        rise = y2 - y1
+        run = x2 - x1
         
+        while coordinates:
+            x, y = coordinates.pop()
+            if (x-x1) * rise != (y-y1) * run:
+                return False
         return True
-            
-        
