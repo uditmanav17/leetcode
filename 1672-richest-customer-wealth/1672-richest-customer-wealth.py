@@ -1,9 +1,9 @@
 class Solution:
     def maximumWealth(self, accounts: List[List[int]]) -> int:
-        ans = -1
+        max_ = float("-inf")
         
-        for sub_li in accounts:
-            ans = max(ans, sum(sub_li))
+        for row in accounts:
+            max_ = max(max_, sum(row))
             
-        return ans
+        return max_
         
