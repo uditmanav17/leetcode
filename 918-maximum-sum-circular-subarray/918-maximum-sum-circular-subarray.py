@@ -1,7 +1,6 @@
-# https://leetcode.com/problems/maximum-sum-circular-subarray/discuss/178422/One-Pass
-
 class Solution:
     def maxSubarraySumCircular(self, nums: List[int]) -> int:
+        
         # kadane with max/min subarr sum
         
         total = nums[0]
