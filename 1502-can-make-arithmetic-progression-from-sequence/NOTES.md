@@ -1,0 +1,3 @@
+- sort arr
+- compute `diff` be consecutive nums
+- if different diff - return False
