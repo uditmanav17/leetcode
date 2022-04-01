@@ -1,23 +1,25 @@
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
-        i = 0
         n = len(nums)
         
-        for num in nums:
+        for idx, num in enumerate(nums):
             if num <= 0 or num > n:
+                nums[idx] = n + 1
+        # print(nums)
+        
+        for idx, num in enumerate(nums):
+            num = abs(num)
+            if num > n:
                 continue
+            nums[num-1] = -1 * abs(nums[num-1])
+            # print(num, nums)
+        
+        counts = 0
+        for idx, num in enumerate(nums):
+            if num > 0:
+                return idx + 1
+        return n + 1
             
-            set_bit = 1 << (num - 1)
-            i |= set_bit
+        
             
-        ans = bin(i)[2:].zfill(n)
-        
-        # print(ans)
-        for idx, bit in enumerate(ans[::-1], 1):
-            if bit == '0':
-                return idx
-        
-        # in case all numbers within array are present
-        return idx + 1
-        
         
