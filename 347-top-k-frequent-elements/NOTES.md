@@ -1,1 +1,6 @@
-​
+- bucket sort
+- since k is in the range [1, the number of unique elements in the array]
+- add elements in buckets based on their frequencies
+- flatten all lists of elements
+- return last k elements from flattened list
+- Time - O(n)
