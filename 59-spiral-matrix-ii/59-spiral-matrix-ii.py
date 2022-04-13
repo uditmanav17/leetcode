@@ -1,5 +1,3 @@
-# https://leetcode.com/problems/spiral-matrix-ii/discuss/963128/Python-rotate-when-need-explained
-
 class Solution:
     def generateMatrix(self, n: int) -> List[List[int]]:
         mat = [[0] * n for _ in range(n)]
@@ -19,4 +17,3 @@ class Solution:
             x, y = x + dx, y + dy
             
         return mat
-                
