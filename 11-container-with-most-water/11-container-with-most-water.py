@@ -1,25 +1,19 @@
-
 class Solution:
-    def maxArea(self, arr) -> int:
-        if len(arr) == 0:
-            return 0
-
-        maxwater = 0
+    def maxArea(self, arr: List[int]) -> int:
+        maxWater = 0
+        l_idx, r_idx = 0, len(arr) - 1
         
-        left, right = 0, len(arr) - 1
-        leftMax, rightMax = arr[left], arr[right]
-
-        while left < right:
-            diff = right - left
-            water = min(leftMax, rightMax) * diff
-            maxwater = max(maxwater, water)
+        
+        while l_idx < r_idx:
+            diff = abs(r_idx - l_idx)
+            l_max, r_max = arr[l_idx], arr[r_idx]
+            water_area = min(l_max, r_max) * diff
+            maxWater = max(maxWater, water_area)
             
-            if arr[left] < arr[right]:
-                left += 1
-                leftMax = max(leftMax, arr[left])
+            if l_max < r_max:
+                l_idx += 1
             else:
-                right -= 1
-                rightMax = max(rightMax, arr[right])
-
-        return maxwater
-
+                r_idx -= 1
+                
+        return maxWater
+        
