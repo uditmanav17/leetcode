@@ -1,22 +1,17 @@
 class Solution:
-    def backspaceCompare(self, s: str, t: str) -> bool:
-        s1, s2 = [], []
-        
+    def backspaceCompare(self, S: str, T: str) -> bool:
+        s= self.vi(S)
+        t= self.vi(T)
+        print(s, t)
+        return self.vi(S) == self.vi(T)
+    
+    def vi(self, s: str):
+        ans = []
         for char in s:
-            if char == '#':
-                if s1:
-                    s1.pop()
+            if char=='#':
+                if ans:
+                    ans.pop()
             else:
-                s1.append(char)
-                
-        for char in t:
-            if char == '#':
-                if s2:
-                    s2.pop()
-            else:
-                s2.append(char)
-                
-        return s1 == s2
-        
-            
+                ans.append(char)
+        return "".join(ans)
         
