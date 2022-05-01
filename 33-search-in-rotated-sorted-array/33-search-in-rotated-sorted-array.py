@@ -1,45 +1,33 @@
 class Solution:
-    def binSearch(self, arr, l, r, target):
-        while l <= r:
-            m = l + (r - l) // 2
-            if arr[m] == target:
-                return m
-            elif arr[m] > target:
-                r = m - 1
-            else:
-                l = m + 1
-        return -1
-                
-        
-    
-    def search(self, arr: List[int], target: int) -> int:
-        # ans = self.binSearch([1,2,3,4,5,6,7,8,9], 0, 4, 5)
-        # print(ans)
-
-        l, r = 0, len(arr) - 1
+    def searchHelper(self, arr, l, r, target):
         
         while l <= r:
-            mid = l + (r-l) // 2
-            if arr[mid] == target:
+            mid = l + ((r - l) // 2)
+            
+            potential_match = arr[mid]
+            left_num = arr[l]
+            right_num = arr[r]
+            
+            if potential_match == target:
                 return mid
             
-            # left part of mid is sorted
-            if arr[l] <= arr[mid]:
-                if arr[l] <= target < arr[mid]:
-                    return self.binSearch(arr, l, mid - 1, target)
+            # left side is sorted
+            elif left_num <= potential_match:
+                if left_num <= target < potential_match:
+                    r = mid - 1
                 else:
                     l = mid + 1
             
-            # right part of mid is sorted
-            elif arr[mid] <= arr[r]:
-                if arr[mid] < target <= arr[r]:
-                    return self.binSearch(arr, mid + 1, r, target)
+            # right side is sorted
+            else:
+                if potential_match < target <= right_num:
+                    l = mid + 1
                 else:
                     r = mid - 1
                     
         return -1
-                
-                
+            
+        
     
-                
-                
+    def search(self, nums: List[int], target: int) -> int:
+        return self.searchHelper(nums, 0, len(nums) - 1, target)
