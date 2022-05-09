@@ -12,26 +12,15 @@ class Solution:
         }
         
     def letterCombinations(self, digits: str) -> List[str]:
-        ans = []
         
-        for digit in digits:
-            if not ans:
-                ans = list(self.numpad[digit])
-                continue
-                
-            temp_q = ans[:]
-            q = list(self.numpad[digit])
-            ans.clear()
-            
-            while q:
-                ele = q.pop()
-                ans.extend([i + ele for i in temp_q])
-                
+        
+        ans = deque(list(self.numpad[digits[0]])) if digits else []
+        
+        for digit in digits[1:]:
+            curr_ans_len = len(ans)
+            for _ in range(curr_ans_len):
+                curr_seq = ans.popleft()
+                new_seq = [curr_seq + char for char in self.numpad[digit]]
+                ans.extend(new_seq)
+        
         return ans
-                
-                
-            
-                
-                
-            
-        
