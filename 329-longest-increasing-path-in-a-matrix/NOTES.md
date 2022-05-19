@@ -1,0 +1,12 @@
+https://leetcode.com/problems/longest-increasing-path-in-a-matrix/discuss/155469/Python-very-simple-DFS-%2B-memoization-only-one-dictionary-with-short-explaination!
+​
+​
+https://leetcode.com/problems/longest-increasing-path-in-a-matrix/discuss/1151423/C%2B%2B-Optimization-from-Brute-Force-to-DP-or-Easy-Solution-w-Explanation
+​
+​
+https://leetcode.com/problems/longest-increasing-path-in-a-matrix/discuss/1429348/C%2B%2BPython-2-solutions%3A-DFS-and-Memoization-Topology-Sort-Peel-Onion-Clean-and-Concise
+​
+​
+https://leetcode.com/problems/longest-increasing-path-in-a-matrix/discuss/78381/Short-Python...
+​
+​
