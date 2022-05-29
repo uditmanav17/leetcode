@@ -1,15 +1,15 @@
 class Solution:
     def maxProduct(self, words: List[str]) -> int:
-        ans = 0
+        d, ans = defaultdict(int), 0
         
-        for idx1 in range(len(words)):
-            w1 = words[idx1]
-            for idx2 in range(idx1):
-                w2 = words[idx2]
-                intersection = set(w1).intersection(set(w2))
-                # print(intersection)
-                if len(intersection) == 0:
-                    ans = max(ans, len(w1) * len(w2))
-                    
-        return ans
+        for word in words:
+            for char in word:
+                d[word] |= 1 << (ord(char) - 97)
+                
+        # print(d)
+        for w1, w2 in combinations(d.keys(), 2):
+            if d[w1] & d[w2] == 0: 
+                ans = max(ans, len(w1)*len(w2))
+                
+        return ans 
         
