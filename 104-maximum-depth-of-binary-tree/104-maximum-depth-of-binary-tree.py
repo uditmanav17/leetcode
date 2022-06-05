@@ -4,10 +4,20 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
 class Solution:
+
+    def depthHelper(self, node, depth=0):
+        if not node:
+            return depth
+
+        left_depth = self.depthHelper(node.left, depth + 1)
+        right_depth = self.depthHelper(node.right, depth + 1)
+
+        return max(left_depth, right_depth)
+
+
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        if not root:
-            return 0
+        return self.depthHelper(root)
         
-        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
         
