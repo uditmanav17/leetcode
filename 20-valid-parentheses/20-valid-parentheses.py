@@ -1,21 +1,14 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+        bkt_map = {"}":"{", ")":"(", "]":"["}
+        stk = deque()
         
-        maps = {k:v for k, v in zip("]})", "({["[::-1])}
-        # print(maps)
-        
-        stack = deque([])
-        
-        for char in s:
-            if char in maps.keys():
-                if not stack or stack.pop() != maps[char]:
+        for bkt in s:
+            if bkt in bkt_map.keys():
+                if not stk or stk.pop() != bkt_map[bkt]:
                     return False
             else:
-                stack.append(char)
-        
-        # print(stack)
-        
-        return not stack
-            
+                stk.append(bkt)
                 
+        return not stk
         
