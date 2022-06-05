@@ -1,13 +1,11 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        # kadane
-        curr_max = all_max = nums[0]
+        curr_sum = max_sum = nums[0]
         
         for idx in range(1, len(nums)):
-            curr_max = max(curr_max + nums[idx], nums[idx])
-            all_max = max(all_max, curr_max)
+            n = nums[idx]
+            curr_sum = max(n, curr_sum + n)
+            max_sum = max(max_sum, curr_sum)
             
-        return all_max
-            
-        
+        return max_sum
         
