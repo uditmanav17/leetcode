@@ -1,12 +1,17 @@
 
 class Solution:
-    def __init__(self):
-        self.steps = {1:1, 2:2}
-        n = 3
-        while n <= 45:
-            next_steps = self.steps[n-1] + self.steps[n-2]
-            self.steps[n] = next_steps
-            n += 1
-            
     def climbStairs(self, n: int) -> int:
-        return self.steps[n]
+        if n <= 1:
+            return 1
+        
+        last = second_last = 1
+        
+        for idx in range(2, n + 1):
+            curr = last + second_last
+            second_last, last = last, curr
+            
+        return curr
+            
+        
+        
+        
