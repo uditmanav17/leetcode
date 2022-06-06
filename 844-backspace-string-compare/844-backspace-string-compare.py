@@ -1,17 +1,20 @@
+
 class Solution:
-    def backspaceCompare(self, S: str, T: str) -> bool:
-        s= self.vi(S)
-        t= self.vi(T)
-        print(s, t)
-        return self.vi(S) == self.vi(T)
-    
-    def vi(self, s: str):
-        ans = []
+    def final_string(self, s: str):
+        stack = deque()
+        
         for char in s:
-            if char=='#':
-                if ans:
-                    ans.pop()
-            else:
-                ans.append(char)
-        return "".join(ans)
+            if stack and char == "#":
+                stack.pop()
+            elif char != "#":
+                stack.append(char)
+        
+        return "".join(stack)
+    
+    
+        
+    def backspaceCompare(self, s: str, t: str) -> bool:
+        # print(self.final_string(s), self.final_string(t))
+        return self.final_string(s) == self.final_string(t)
+        
         
