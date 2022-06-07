@@ -1,22 +1,20 @@
-from math import sqrt
-from heapq import heappush, heappop
 
 class Solution:
-    def origin_dist(self, x, y):
-        return sqrt(x**2 + y**2)
+    def calc_dist(self, x1, y1, x2=0, y2=0):
+        return (abs(x1 - x2)**2 + abs(y2 - y1)**2)**0.5
+    
     
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        ans = []
         heap = []
         
         for x, y in points:
-            dist = self.origin_dist(x, y)
-            heappush(heap, (dist, x, y))
+            heappush(heap, (self.calc_dist(x, y), x, y))
             
-        # print(heap)
-        for _ in range(k):
-            t, x, y = heappop(heap)
+        ans = []
+        while k:
+            k -= 1
+            _, x, y = heappop(heap)
             ans.append((x, y))
             
         return ans
-            
+        
