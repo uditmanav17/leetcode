@@ -1,19 +1,19 @@
 class Solution:
+    def is_palindrome(self, s, left, right):
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return (left + 1, right)
+        
     def longestPalindrome(self, s: str) -> str:
+        longest_palin = (0, 0)
         
-        def is_palin(mid1, mid2):
-            while mid1 >= 0 and mid2 < len(s) and s[mid1] == s[mid2]:
-                mid1 -= 1
-                mid2 += 1
-            return [mid1 + 1, mid2]
-        
-        
-        longest = [0, 0]
         for idx in range(len(s)):
-            odd_len_palin = is_palin(idx, idx)
-            eve_len_palin = is_palin(idx, idx + 1)
-            longest = max(longest, odd_len_palin, eve_len_palin, 
-                          key=lambda x: x[1] - x[0])
-            # print(idx, odd_len_palin, eve_len_palin, longest)
+            odd_len_palin = self.is_palindrome(s, idx, idx)
+            even_len_palin = self.is_palindrome(s, idx, idx+1)
+            # print(odd_len_palin, even_len_palin)
+            longest_palin = max(longest_palin, odd_len_palin, even_len_palin, 
+                                key = lambda x : x[1] - x[0])
             
-        return s[longest[0]:longest[1]]
+        return s[longest_palin[0]: longest_palin[1]]
+        
