@@ -1,11 +1,10 @@
 class Solution:
-    def fib(self, n: int) -> int:
-        f0, f1 = 0, 1
-        if n <= 1:
-            return n
+    def __init__(self):
+        self.fibo = {0:0, 1:1}
+        for i in range(2, 31):
+            self.fibo[i] = self.fibo[i-1] + self.fibo[i-2]
         
-        for _ in range(2, n + 1):
-            f0, f1 = f1, f0 + f1
-            
-        return f1
+    def fib(self, n: int) -> int:
+        return self.fibo[n]
+        
         
