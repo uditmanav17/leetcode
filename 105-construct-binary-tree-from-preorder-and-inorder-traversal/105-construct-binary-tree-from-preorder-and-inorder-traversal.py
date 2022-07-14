@@ -1,5 +1,3 @@
-# https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/discuss/1258585/Python-Intuitive-O(n)-solution-explained
-
 
 # Definition for a binary tree node.
 # class TreeNode:
