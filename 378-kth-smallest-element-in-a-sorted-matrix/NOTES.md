@@ -1,0 +1,1 @@
+[Apporaches](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/discuss/1322101/)
