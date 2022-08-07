@@ -1,0 +1,1 @@
+[DP](https://leetcode.com/problems/count-vowels-permutation/discuss/1315077/)
