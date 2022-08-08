@@ -1,13 +1,27 @@
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
-        ans = [1 for _ in range(len(nums))]
+        if len(nums) == 1:
+            return 1
         
-        for idx1 in range(len(nums)):
-            n1 = nums[idx1]
-            for idx2 in range(idx1):
-                n2 = nums[idx2]
-                if n2 < n1:
-                    ans[idx1] = max(ans[idx1], ans[idx2] + 1)
+        piles = []
+        
+        for num in nums:
+            if not piles:
+                piles.append([num])
+                
+            else:
+                added = False
+                for pile in piles:
+                    n2 = pile[-1]
+                    if n2 >= num:
+                        pile.append(num)
+                        added = True
+                        break
+                if not added:
+                    piles.append([num])
                     
-        # print(ans)
-        return max(ans)
+        # print(piles)
+        return len(piles)
+                    
+        
+        
