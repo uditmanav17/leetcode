@@ -6,14 +6,19 @@
 #         self.right = None
 
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', 
+    def lowestCommonAncestor(self, 
+                             root: 'TreeNode', 
                              p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if p.val > q.val:
+            p, q = q, p
         
-        if min(p.val, q.val) <= root.val <= max(p.val, q.val):
+        if p.val <= root.val <= q.val:
             return root
-        elif root.val < min(p.val, q.val):
-            return self.lowestCommonAncestor(root.right, p, q)
-        elif root.val > max(p.val, q.val):
+        
+        elif q.val < root.val:
             return self.lowestCommonAncestor(root.left, p, q)
+        
+        else:
+            return self.lowestCommonAncestor(root.right, p, q)
             
         
